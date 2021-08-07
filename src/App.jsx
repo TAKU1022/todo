@@ -1,35 +1,46 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
-import { ColorfulMessage } from './components/ColorfulMessage';
+import React, { useState } from 'react';
 
-const App = () => {
-  const [number, setNumber] = useState(0);
-  const [faceShowFlag, setfaceShowFlag] = useState(false);
-
-  const countUp = () => setNumber(number + 1);
-  const switchFaceShowFlag = () => setfaceShowFlag(!faceShowFlag);
-
-  useEffect(() => {
-    if (number > 0) {
-      if (number % 3 === 0) {
-        faceShowFlag || setfaceShowFlag(true);
-      } else {
-        faceShowFlag && setfaceShowFlag(false);
-      }
-    }
-  }, [number]);
+export const App = () => {
+  const [imcompleteTodos, setimcompleteTodos] = useState([
+    'ああああ',
+    'いいいい',
+  ]);
+  const [completeTodos, setcompleteTodos] = useState(['うううう']);
 
   return (
     <React.Fragment>
-      <h1 style={{ color: 'red' }}>こんにちわ！</h1>
-      <ColorfulMessage color="blue">お元気ですか？</ColorfulMessage>
-      <ColorfulMessage color="pink">元気です！</ColorfulMessage>
-      <button onClick={countUp}>ボタン</button>
-      <button onClick={switchFaceShowFlag}>on/off</button>
-      <p>{number}</p>
-      {faceShowFlag && <p>(　ﾟдﾟ)</p>}
+      <div className="input-area">
+        <input type="text" placeholder="TODOを入力" />
+        <button>追加</button>
+      </div>
+      <div className="incomplete-area">
+        <p>未完了のTODO</p>
+        <ul>
+          {imcompleteTodos.map((todo) => {
+            return (
+              <li className="list-row" key={todo}>
+                <p>{todo}</p>
+                <button>完了</button>
+                <button>削除</button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+      <div className="complete-area">
+        <p>未完了のTODO</p>
+        <ul>
+          {completeTodos.map((todo) => {
+            return (
+              <li className="list-row" key={todo}>
+                <p>{todo}</p>
+                <button>完了</button>
+                <button>削除</button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </React.Fragment>
   );
 };
-
-export default App;

@@ -5,7 +5,7 @@ export const IncompletedTodos = (props) => {
 
   return (
     <div className="incomplete-area">
-      <p>未完了のTODO</p>
+      <p className="title">未完了のTODO</p>
       <ul>
         {incompletedTodos.map((todo, index) => {
           return (

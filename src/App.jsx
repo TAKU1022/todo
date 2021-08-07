@@ -2,11 +2,8 @@ import React, { useState } from 'react';
 
 export const App = () => {
   const [todoText, setTodoText] = useState('');
-  const [incompleteTodos, setIncompleteTodos] = useState([
-    'ああああ',
-    'いいいい',
-  ]);
-  const [completeTodos, setCompleteTodos] = useState(['うううう']);
+  const [incompleteTodos, setIncompleteTodos] = useState([]);
+  const [completeTodos, setCompleteTodos] = useState([]);
 
   const onChangeTodoText = (event) => setTodoText(event.target.value);
 
@@ -32,6 +29,15 @@ export const App = () => {
     setIncompleteTodos(newTodos);
   };
 
+  const onClickBack = (index) => {
+    const newCompleteTodos = [...completeTodos];
+    newCompleteTodos.splice(index, 1);
+    setCompleteTodos(newCompleteTodos);
+
+    const newIncompleteTodos = [...incompleteTodos, completeTodos[index]];
+    setIncompleteTodos(newIncompleteTodos);
+  };
+
   return (
     <React.Fragment>
       <div className="input-area">
@@ -49,7 +55,7 @@ export const App = () => {
           {incompleteTodos.map((todo, index) => {
             return (
               <li className="list-row" key={index}>
-                <p>{todo}</p>
+                <span>{todo}</span>
                 <button onClick={() => onClickComplete(index)}>完了</button>
                 <button onClick={() => onClickDelete(index)}>削除</button>
               </li>
@@ -63,8 +69,8 @@ export const App = () => {
           {completeTodos.map((todo, index) => {
             return (
               <li className="list-row" key={index}>
-                <p>{todo}</p>
-                <button>戻す</button>
+                <span>{todo}</span>
+                <button onClick={() => onClickBack(index)}>戻す</button>
               </li>
             );
           })}

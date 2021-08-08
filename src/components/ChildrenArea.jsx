@@ -1,29 +1,27 @@
 import React, { memo } from 'react';
-
-const style = {
-  width: '100%',
-  height: '200px',
-  backgroundColor: 'khaki',
-};
+import styled from 'styled-components';
 
 export const ChildrenArea = memo((props) => {
   const { open, closeArea } = props;
 
   console.log('childrenAreaがレンダリングされた！');
 
-  const data = [...Array(2000).keys()];
-  data.forEach(() => {
-    console.log('...');
-  });
-
   return (
     <>
       {open ? (
-        <div style={style}>
+        <Container>
           <p>子コンポーネント</p>
           <button onClick={closeArea}>閉じる</button>
-        </div>
+        </Container>
       ) : null}
     </>
   );
 });
+
+const Container = styled.div`
+  width: 100%;
+  height: 200px;
+  background-color: khaki;
+  text-align: center;
+  padding: 40px;
+`;

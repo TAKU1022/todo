@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { CompletedTodos } from './components/completedTodos';
+import { ChildrenArea } from './components/ChildrenArea';
+import { CompletedTodos } from './components/CompletedTodos';
 import { IncompletedTodos } from './components/IncompletedTodos';
 import { InputTodo } from './components/InputTodo';
 
@@ -43,8 +44,17 @@ export const App = () => {
     setIncompletedTodos(newIncompleteTodos);
   };
 
+  const [text, setText] = useState('');
+  const [open, setOpen] = useState(false);
+
+  const changeText = (event) => setText(event.target.value);
+
+  const openArea = () => setOpen(!open);
+
+  const closeArea = () => setOpen(false);
+
   return (
-    <React.Fragment>
+    <>
       <InputTodo
         todoText={todoText}
         changeTodoText={changeTodoText}
@@ -68,6 +78,17 @@ export const App = () => {
         completedTodos={completedTodos}
         restoreTask={restoreTask}
       ></CompletedTodos>
-    </React.Fragment>
+
+      <div className="App">
+        <input
+          className="practice-input"
+          type="text"
+          value={text}
+          onChange={changeText}
+        />
+        <button onClick={openArea}>表示</button>
+        <ChildrenArea open={open} closeArea={closeArea}></ChildrenArea>
+      </div>
+    </>
   );
 };

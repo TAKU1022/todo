@@ -12,6 +12,8 @@ export const App = () => {
 
   const addTask = () => {
     if (todoText === '') return;
+    if (incompletedTodos.length >= 5) return;
+
     const newTodos = [...incompletedTodos, todoText];
     setIncompletedTodos(newTodos);
     setTodoText('');
@@ -47,7 +49,14 @@ export const App = () => {
         todoText={todoText}
         changeTodoText={changeTodoText}
         addTask={addTask}
+        disabled={incompletedTodos.length >= 5}
       ></InputTodo>
+
+      {incompletedTodos.length >= 5 && (
+        <p style={{ color: 'red', width: '400px', textAlign: 'center' }}>
+          未完了のタスクを消化してください
+        </p>
+      )}
 
       <IncompletedTodos
         incompletedTodos={incompletedTodos}

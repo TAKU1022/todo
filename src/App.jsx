@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { ChildrenArea } from './components/ChildrenArea';
 import { CompletedTodos } from './components/CompletedTodos';
 import { IncompletedTodos } from './components/IncompletedTodos';
@@ -51,7 +51,7 @@ export const App = () => {
 
   const openArea = () => setOpen(!open);
 
-  const closeArea = () => setOpen(false);
+  const closeArea = useCallback(() => setOpen(false), []);
 
   return (
     <>

@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const CompletedTodos = (props) => {
   const { completedTodos, restoreTask } = props;
 
